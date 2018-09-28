@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 public class OneDataSourceConfig {
 
     private String mapperLocation = "classpath:mapping/one/*.xml";
-
+    //首先创建一个SqlSessionFactory，将第一个数据源注入到其中。
     @Bean(name = "oneSqlSessionFactory")
     @Primary
     public SqlSessionFactory testSqlSessionFactory(@Qualifier("oneDataSource") DataSource dataSource) throws Exception {
@@ -28,13 +28,13 @@ public class OneDataSourceConfig {
         bean.setDataSource(dataSource);
         return bean.getObject();
     }
-
+    //同时将数据源添加到事务中。
     @Bean(name = "oneTransactionManager")
     @Primary
     public DataSourceTransactionManager testTransactionManager(@Qualifier("oneDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
-
+    //接下来将上面创建的SqlSessionFactory注入，创建在 Mapper 中需要使用的SqlSessionTemplate。
     @Bean(name = "oneSqlSessionTemplate")
     @Primary
     public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("oneSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
