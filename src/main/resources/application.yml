@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+    druid:
+      one:
+        url: jdbc:mysql://127.0.0.1:3306/test
+        username: root
+        password: system
+        initial-size: 15
+        min-idle: 15
+        max-active: 20
+        max-wait: 60000
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+      two:
+        url: jdbc:mysql://127.0.0.1:3306/test1
+        username: root
+        password: system
+        initial-size: 15
+        min-idle: 15
+        max-active: 20
+        max-wait: 60000
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+#mybatis:
+#  mapper-locations: classpath:mapping/one/*.xml
+#  type-aliases-package: com.example.model
+
+

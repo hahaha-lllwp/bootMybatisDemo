@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.GraduateInfoDao">
+  <resultMap id="BaseResultMap" type="com.example.model.GraduateInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="expiredTime" jdbcType="INTEGER" property="expiredtime" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
+    <result column="delete_time" jdbcType="INTEGER" property="deleteTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, email, password, gender, token, expiredTime, age, school_name, create_time, 
+    update_time, delete_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from graduate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="long">
+    delete from graduate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.model.GraduateInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into graduate (name, email, password, 
+      gender, token, expiredTime, 
+      age, school_name, create_time, 
+      update_time, delete_time)
+    values (#{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{expiredtime,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{schoolName,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=INTEGER}, #{deleteTime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.model.GraduateInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into graduate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="expiredtime != null">
+        expiredTime,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="schoolName != null">
+        school_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredtime != null">
+        #{expiredtime,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="schoolName != null">
+        #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.model.GraduateInfo">
+    update graduate
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredtime != null">
+        expiredTime = #{expiredtime,jdbcType=INTEGER},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="schoolName != null">
+        school_name = #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.model.GraduateInfo">
+    update graduate
+    set name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR},
+      expiredTime = #{expiredtime,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      school_name = #{schoolName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      delete_time = #{deleteTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
